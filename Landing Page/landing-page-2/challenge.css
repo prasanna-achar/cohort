@@ -124,6 +124,7 @@ body {
   border-radius: 25px;
   font-size: large;
   transition: background 0.5s ease, border 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;
+  cursor: pointer;
 }
 
 .enroll-button:hover {
@@ -153,6 +154,11 @@ body {
   background-color: #ff7300;
   border-radius: 25px;
   border:1px solid #000;
+  transition: transform 0.5s ease;
+}
+
+.highlight-card:hover{
+  transform:scale(0.98);
 }
 
 .highlight-card h3 {
