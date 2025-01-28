@@ -4,75 +4,164 @@
   padding: 0;
   box-sizing: border-box;
 }
+html{
+  background-color: #212146;
+}
 
 body {
   font-family: "Inter", sans-serif;
   line-height: 1.6;
+  background-color: #212146;
 }
 
 /* Navbar styles */
 .navbar {
   /* Add styles for the navbar */
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 12px;
+  background-color: #ff7300;
 }
 
 .logo {
   /* Add styles for the logo */
+  flex:1;
+  justify-self:left;
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+  font-size: 1.5em;
+  font-weight: 700;
+  
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .logo img {
   /* Add styles for the logo image */
+  border-radius: 10px;
+  transform: none;
+  transition: transform 0.4s ease ;
+}
+.logo img:hover{
+  transform: rotate(-5deg);
+}
+.menu{
+  flex:1;
+  display: flex;
+  justify-content: space-around;
 }
 
 .menu a {
   /* Add styles for the navigation links */
+  text-decoration: none;
+  color: #fff;
+  transition: transform 0.5s ease, text-shadow 0.5s ease;
 }
 
 .menu a:hover {
   /* Add hover styles for navigation links */
+  transform: scale(1.05);
+  text-shadow: 5px 5px 10px #fff;
 }
 
 /* Hero section styles */
 .hero {
   /* Add styles for the hero section */
+  width:99vw;
+  min-height: 50vh;
+  max-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2)), url('./assets/chaicohort.png');
+  padding-bottom:50px ;
 }
 
 .hero-content {
   /* Add styles for the hero content container */
+  width:70%;
+ 
+  border: 2px solid #ff7300;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 25px;
+  padding:40px;
+  gap:10px;
+  margin-top:50px;
 }
 
 .hero-content h1 {
   /* Add styles for the hero heading */
+  display: inline;
+  font-size: 2.7rem;
+  color: #fff;
 }
 
 .hero-content p {
   /* Add styles for the hero paragraph */
+  color: #4d4a4a;
 }
 
 .hero-content img {
   /* Add styles for the image in the hero section */
+ width:25rem;
+  border: 2px solid #ffffff;
+  border-radius: 25px;
 }
 
 .enroll-button {
   /* Add styles for the enroll button */
+  width: 150px;
+  margin-top: 20px;
+  height: 50px;
+  color:#fff;
+  background: linear-gradient(to right, #ff7c11, #ff7300);
+  border: none;
+  border-radius: 25px;
+  font-size: large;
+  transition: background 0.5s ease, border 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;
 }
 
 .enroll-button:hover {
   /* Add hover styles for the enroll button */
+  transform:scale(1.05);
+  background: linear-gradient(to right, #ff7c11, #ff7300);
+  border: 0.5px solid #b4b4b4;
+  box-shadow: 2px 5px 10px #ff7c11;
 }
 
 /* Highlights section styles */
 .highlights {
   /* Add styles for the highlights section */
+  display: flex;
+  margin: 50px 40px;
+
+  justify-content: space-evenly;
 }
 
 .highlight-card {
   /* Add styles for each highlight card */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:10px;
+  padding:40px 10px;
+  background-color: #ff7300;
+  border-radius: 25px;
+  border:1px solid #000;
 }
 
 .highlight-card h3 {
   /* Add styles for highlight card headings */
+  font-size: 1.6rem;
+  color: #fff;
 }
 
 .highlight-card p {
   /* Add styles for highlight card paragraphs */
+  color:#b4b4b4
 }
