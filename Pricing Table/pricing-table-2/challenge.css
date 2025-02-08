@@ -9,31 +9,57 @@
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  background-color: #f5f5f5;
+  background-color: #1a1a1a;
 }
 
 .container {
   /* Add your styles here */
+  width: 100vw;
+  min-height: 100vh;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1a1a1a;
+
 }
 
 .header {
   /* Add your styles here */
+  text-align: center;
 }
 
 h1 {
   /* Add your styles here */
+  font-size: 2.5rem;
+  color:#f13333;
 }
 
 .subtitle {
   /* Add your styles here */
+  color:#5a5a5a;
 }
 
 .pricing-container {
   /* Add your styles here */
+  width:100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  gap:20px;
 }
 
 .pricing-card {
   /* Add your styles here */
+  background-color: #2e2626;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding:80px 30px;
+  gap:20px;
+  
 }
 
 .pricing-card:hover {
@@ -50,6 +76,11 @@ h1 {
 
 .popular-tag {
   /* Add your styles here */
+  background-color: #ff8800;
+  padding:5px 10px;
+  border-radius: 25px;
+  justify-self: flex-start;
+  margin-top:0px;
 }
 
 .price-block {
@@ -70,6 +101,7 @@ h1 {
 
 .features li {
   /* Add your styles here */
+  list-style-type: none;
 }
 
 .features li.disabled {
