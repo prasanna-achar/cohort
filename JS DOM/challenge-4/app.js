@@ -9,21 +9,24 @@ document.addEventListener('DOMContentLoaded', ()=>{
   function updateTaskStatus(){
     const totalTasks = document.querySelectorAll('.task-item').length;
     const completedTasks = document.querySelectorAll('.task-item input:checked').length
-    console.log(completedTasks);
-    
+    if(totalTasks !== 0){
+      emptyStatus.style.display = "none"
+    }else{
+      emptyStatus.style.display = "block"
+    }
     totalTaskSpan.textContent = `Total tasks: ${totalTasks}`
     completedTaskSpan.textContent = `Completed tasks: ${completedTasks}`
   }
-
-  if(taskList.children.length === 0){
-    taskList.innerHTML = `<li id='empty-list'> No tasks yet, Add on above!</li>`
-  }
-  updateTaskStatus()
+  
+  
+  
 
   addTask.addEventListener('click', ()=>{
+    
+   
     let task = taskInput.value.trim();
     if(task !== ''){
-
+      
       
 
       const li = document.createElement('li');
@@ -38,7 +41,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
       dltButton.textContent = "Delete"
       dltButton.addEventListener('click',()=>{
         taskList.removeChild(li)
-        
+        updateTaskStatus()
 
       })
       const checkBox = document.createElement('input')
