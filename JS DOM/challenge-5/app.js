@@ -21,194 +21,131 @@ const images = [
   },
 ];
 
-const track = document.getElementById('carouselTrack');
-const prevButton = document.getElementById('prevButton');
-const nextButton = document.getElementById('nextButton');
-const caption = document.getElementById('caption');
-const carouselNav = document.getElementById('carouselNav');
-const autoPlayButton = document.getElementById('autoPlayButton');
-const timerDisplay = document.getElementById('timerDisplay');
+const carouselTrack = document.getElementById('carouselTrack')
+const carouselCaption = document.getElementById('caption')
+const carouselNav = document.getElementById('carouselNav')
+const prevButton = document.getElementById('prevButton')
+const nextButton = document.getElementById('nextButton')
+const autoPlayButton = document.getElementById('autoPlayButton')
+const timerDisplay = document.getElementById('timerDisplay')
 
+let autoplay = true
+let autoPlayTimer = 5
 let currentIndex = 0;
-let autoPlayInterval = null;
-let autoPlayTimer = 5; // seconds
-const autoPlayDelay = 5000; // milliseconds
 
-// Initialize the carousel
-function initializeCarousel() {
-  // Create and append images
-  images.forEach((image, index) => {
-    const slide = document.createElement('div');
-    slide.className = 'carousel-slide';
-    
-    const img = document.createElement('img');
-    img.src = image.url;
-    img.alt = image.caption;
-    img.loading = 'lazy';
-    
-    slide.appendChild(img);
-    track.appendChild(slide);
+document.addEventListener('DOMContentLoaded', () =>{
+  images.map((image, index) =>{
+    const slide = document.createElement('div')
+    slide.classList.add('carousel-slide')
 
-    // Create navigation indicators
-    const indicator = document.createElement('button');
-    indicator.className = 'carousel-indicator';
-    indicator.setAttribute('data-index', index);
-    indicator.addEventListener('click', () => goToSlide(index));
-    carouselNav.appendChild(indicator);
-  });
+    const img = document.createElement('img')
+    img.src = image.url
+    img.alt = img.caption
 
-  updateCarousel();
+    slide.appendChild(img)
+    carouselTrack.appendChild(slide)
+
+    const indicator = document.createElement('button')
+    indicator.classList.add('carousel-indicator')
+    indicator.setAttribute('data-index', index)
+    indicator.addEventListener('click' , () => gotoSlide(index))
+    carouselNav.appendChild(indicator)
+  })
+  updateImageSlide();
+})
+
+function updateImageSlide(){
+  carouselTrack.style.transition = 'transform 0.7s ease-in-out'
+  carouselTrack.style.transform = `translateX(-${currentIndex * 100}%)`
+
+  carouselCaption.style.opacity = '0'
+  setTimeout(()=>{
+    carouselCaption.textContent = images[currentIndex].caption
+    carouselCaption.style.opacity = '1'
+  }, 200);
 }
 
-// Update carousel display with smooth animation
-function updateCarousel() {
-  // Add transition for smooth sliding
-  track.style.transition = 'transform 0.5s ease-in-out';
-  // track.style.transform = `translateX(-${currentIndex * 100}%)`;
-  
-  // Update caption with fade effect
-  caption.style.opacity = '0';
-  setTimeout(() => {
-    caption.textContent = images[currentIndex].caption;
-    caption.style.opacity = '1';
-  }, 250);
-  
-  // Update indicators with active state animation
-  const indicators = carouselNav.getElementsByClassName('carousel-indicator');
-  Array.from(indicators).forEach((indicator, index) => {
-    indicator.classList.toggle('active', index === currentIndex);
-  });
-}
+const indicators = carouselNav.getElementsByClassName('carousel-indicator')
+Array.from(indicators).forEach((indicator, index) =>{
+  indicator.classList.toggle('active', index === currentIndex)
+})
 
-// Navigation functions with animation
-function goToSlide(index) {
+function gotoSlide(index){
   currentIndex = index;
-  updateCarousel();
+  updateImageSlide()
 }
 
-function nextSlide() {
+function nextSlide(){
   currentIndex = (currentIndex + 1) % images.length;
-  updateCarousel();
+  updateImageSlide()
 }
-
-function prevSlide() {
+function prevSlide(){
   currentIndex = (currentIndex - 1 + images.length) % images.length;
-  updateCarousel();
+  updateImageSlide()
 }
+nextButton.addEventListener('click',() => nextSlide())
+prevButton.addEventListener('click',() => prevSlide())
 
-// Auto-play functions with smooth timer animation
-function toggleAutoPlay() {
-  if (autoPlayInterval) {
-    stopAutoPlay();
-  } else {
-    startAutoPlay();
-  }
-}
 
-function startAutoPlay() {
-  autoPlayButton.textContent = 'Stop Auto Play';
-  autoPlayTimer = 5;
-  updateTimerDisplay();
+// autoPlayButton.addEventListener('click', (e)=>{
   
-  // Smooth countdown animation
-  autoPlayInterval = setInterval(() => {
-    autoPlayTimer--;
-    updateTimerDisplay();
-    
-    if (autoPlayTimer === 0) {
-      nextSlide();
-      autoPlayTimer = 5;
-    }
-  }, 1000);
-}
-
-function stopAutoPlay() {
-  autoPlayButton.textContent = 'Start Auto Play';
-  clearInterval(autoPlayInterval);
-  autoPlayInterval = null;
-  
-  // Fade out timer display
-  timerDisplay.style.opacity = '0';
-  setTimeout(() => {
-    timerDisplay.textContent = '';
-    timerDisplay.style.opacity = '1';
-  }, 250);
-}
-
-function updateTimerDisplay() {
-  if (autoPlayInterval) {
-    timerDisplay.style.opacity = '0';
-    setTimeout(() => {
-      timerDisplay.textContent = `Next slide in ${autoPlayTimer}s`;
-      timerDisplay.style.opacity = '1';
-    }, 150);
-  }
-}
-
-// Event listeners
-prevButton.addEventListener('click', () => {
-  prevSlide();
-  stopAutoPlay();
-});
-
-nextButton.addEventListener('click', () => {
-  nextSlide();
-  stopAutoPlay();
-});
-
-autoPlayButton.addEventListener('click', toggleAutoPlay);
-
-// Initialize the carousel when the page loads
-document.addEventListener('DOMContentLoaded', initializeCarousel);
-
-// Add keyboard navigation
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowLeft') {
-    prevSlide();
-    stopAutoPlay();
-  } else if (e.key === 'ArrowRight') {
-    nextSlide();
-    stopAutoPlay();
-  }
-});
-
-// Add touch support for mobile devices with smooth animations
-// let touchStartX = 0;
-// let touchEndX = 0;
-
-// track.addEventListener('touchstart', (e) => {
-//   touchStartX = e.touches[0].clientX;
-//   // Disable transition during touch
-//   track.style.transition = 'none';
-// });
-
-// track.addEventListener('touchmove', (e) => {
-//   const currentTouch = e.touches[0].clientX;
-//   const diff = touchStartX - currentTouch;
-//   const offset = -(currentIndex * 100 + (diff / track.offsetWidth) * 100);
-//   track.style.transform = `translateX(${offset}%)`;
-// });
-
-// track.addEventListener('touchend', (e) => {
-//   touchEndX = e.changedTouches[0].clientX;
-//   // Re-enable transition
-//   track.style.transition = 'transform 0.5s ease-in-out';
-//   handleSwipe();
-// });
-
-// function handleSwipe() {
-//   const swipeThreshold = 50;
-//   const swipeDistance = touchEndX - touchStartX;
-  
-//   if (Math.abs(swipeDistance) > swipeThreshold) {
-//     if (swipeDistance > 0) {
-//       prevSlide();
-//     } else {
-//       nextSlide();
-//     }
-//     stopAutoPlay();
-//   } else {
-//     // Return to current slide if swipe wasn't long enough
-//     updateCarousel();
+//   const startAutoPlay = ()=>{
+//     nextSlide();
 //   }
-// }
+//   const getTimer = ()=>{
+//     timerDisplay.innerHTML = `next slide in ${autoPlayTimer !== 0 ? autoPlayTimer-- : autoPlayTimer = 4}s`
+//   }
+//   console.log(autoplay)
+//   if(autoplay){
+//     autoPlayButton.innerHTML = "Stop Auto Play"
+//     setInterval(startAutoPlay
+//     , 5*1000)
+    
+//     setInterval(getTimer, 1000)
+//     autoplay = false
+
+//   }else if(!autoplay){
+//     autoPlayButton.innerHTML = "Start Auto Play"
+
+//     // clearInterval(startAutoPlay)
+//     // clearInterval(getTimer)
+//     clearInterval(startAutoPlay())
+//     clearInterval(getTimer())
+//     timerDisplay.innerHTML = ""
+//     autoplay = true
+//   }
+
+  
+  
+// })
+
+
+autoPlayButton.addEventListener('click', () => {
+  
+  const startAutoPlay = () => {
+    nextSlide();
+  };
+
+  const getTimer = () => {
+    timerDisplay.innerHTML = `next slide in ${autoPlayTimer !== 0 ? autoPlayTimer-- : autoPlayTimer = 4}s`;
+  };
+
+  if (autoplay) {
+    autoPlayButton.innerHTML = "Stop Auto Play";
+    
+    // Start Intervals and store their IDs
+    autoPlayInterval = setInterval(startAutoPlay, 5000);
+    timerInterval = setInterval(getTimer, 1000);
+    
+    autoplay = false; // Mark autoplay as running
+  } else {
+    autoPlayButton.innerHTML = "Start Auto Play";
+
+    // Clear intervals using stored IDs
+    clearInterval(autoPlayInterval);
+    clearInterval(timerInterval);
+
+    timerDisplay.innerHTML = "";
+    autoplay = true; // Mark autoplay as stopped
+  }
+});

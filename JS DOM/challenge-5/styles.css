@@ -54,8 +54,8 @@ h1 {
 }
 
 .carousel-indicator {
-  width: 30px;
-  height: 5px;
+  width: 40px;
+  height: 2px;
   border-radius: 50%;
   border:none;
   background-color: #bbb;

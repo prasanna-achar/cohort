@@ -18,7 +18,13 @@ jobInput.addEventListener('input', (e) =>{
 })
 
 ageInput.addEventListener('input', (e) =>{
-    dynamicChange(document.getElementById('ageDisplay'), e.target.value)
+    console.log(isNaN(e.target.value))
+    if(isNaN(e.target.value)){
+        alert("enter age in number")
+        e.target.value = ""
+    }else{
+        dynamicChange(document.getElementById('ageDisplay'), e.target.value)
+    }
 })
 
 bioInput.addEventListener('input', (e) =>{
