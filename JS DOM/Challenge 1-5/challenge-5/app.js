@@ -127,7 +127,7 @@ autoPlayButton.addEventListener('click', () => {
   };
 
   const getTimer = () => {
-    timerDisplay.innerHTML = `next slide in ${autoPlayTimer !== 0 ? autoPlayTimer-- : autoPlayTimer = 4}s`;
+    timerDisplay.innerHTML = `next slide in ${autoPlayTimer !== 1 ? --autoPlayTimer : autoPlayTimer = 5}s`;
   };
 
   if (autoplay) {
@@ -144,7 +144,7 @@ autoPlayButton.addEventListener('click', () => {
     // Clear intervals using stored IDs
     clearInterval(autoPlayInterval);
     clearInterval(timerInterval);
-
+    autoPlayTimer = 5;
     timerDisplay.innerHTML = "";
     autoplay = true; // Mark autoplay as stopped
   }
