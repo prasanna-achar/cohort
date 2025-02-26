@@ -32,9 +32,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
       const li = document.createElement('li');
       li.classList.add('task-item')
 
-      const span = document.createElement('span')
-      span.textContent = task;
-      span.classList.add('task-test')
+      const span = document.createElement('input')
+      span.type = "text"
+      span.disabled = true
+      span.value = task;
+      span.classList.add('input-disabled')
       
       const dltButton = document.createElement('button');
       dltButton.classList.add('delete-button')
@@ -56,9 +58,29 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
       })
 
+      const updateBtn = document.createElement('button')
+      updateBtn.textContent = "Edit"
+      let Edit = true
+      updateBtn.addEventListener('click', ()=>{
+        if(Edit){
+          span.disabled = false
+          span.classList.remove('input-disabled')
+          updateBtn.textContent = "Save"
+          Edit = false
+        }else{
+          console.log("In Save")
+          updateBtn.textContent = "Edit"
+
+          span.disabled = true
+          span.classList.add('input-disabled')
+          Edit= true
+        }
+      })
+
       li.appendChild(checkBox)
       li.appendChild(span)
       li.appendChild(dltButton)
+      li.appendChild(updateBtn)
       taskList.appendChild(li)
       taskInput.value = ''
     }

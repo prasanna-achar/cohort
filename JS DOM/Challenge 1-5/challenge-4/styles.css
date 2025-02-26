@@ -120,3 +120,7 @@ h1 {
 .not-empty{
   display: none;
 }
+
+.input-disabled{
+  border : none;
+}
