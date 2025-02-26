@@ -28,6 +28,8 @@ function updateClock(){
   minuteStick.style.transform = `rotate(${minuteDeg}deg)`
   hourStick.style.transform = `rotate(${hourDeg}deg)`
 
+  secondStick.style.transition = `transform 0.5s ease`
+  
   digitalClock.textContent = `${padZero(hour)}:${padZero(minute)}:${padZero(second)}`
   dateSection.textContent = now.toLocaleDateString(undefined, {
     weekday:"long",
