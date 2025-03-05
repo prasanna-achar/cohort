@@ -1,0 +1,12 @@
+{
+  "name": "script",
+  "version": "1.0.0",
+  "description": "For creating frontend dynamic Kanban board web application using localstorage",
+  "main": "main.js",
+  "type":"module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Prasanna Achar",
+  "license": "ISC"
+}
