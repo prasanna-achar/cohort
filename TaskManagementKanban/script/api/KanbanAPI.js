@@ -4,6 +4,12 @@ export default class KanbanAPI{
         return readKanban()
     }
 
+    static getItemById(itemId){
+        const data = this.getAllItems();
+        const searchingItem = data.filter((item) => item.itemId === itemId);
+        return searchingItem[0]
+    }
+
     static createColumn(columnTitle, desrciption){
         const existingKanban = readKanban()
         const findColumn = existingKanban.find(column => column.title.toLowerCase() === columnTitle.toLowerCase())
@@ -79,6 +85,14 @@ export default class KanbanAPI{
             })
         })
         saveKanban(data)
+    }
+    static changeColumnOfItem(itemId, changedColumnId){
+        // if(currentColumnId === changedColumnId){
+        //     return;
+        // }
+        const item = this.getItemById(itemId)
+        this.deleteItem(item.itemId)
+        this.insertItem(changedColumnId, item)
     }
 }
 

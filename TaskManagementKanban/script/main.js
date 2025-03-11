@@ -3,6 +3,7 @@ import KanbanComponents from "./components/KanbanComponents.js";
 import Popup from "./popup/Popup.js";
 
 const root = document.querySelector('.container')
+
 updateKanban()
 
 

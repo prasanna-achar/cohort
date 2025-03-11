@@ -6,10 +6,16 @@ export default class KanbanComponents{
 
     static  createBoard(target) {
         const board = document.createElement('div');
+        console.log(target.columnId);
+        
         board.classList.add("kanban-board");
-    
-        board.addEventListener('dragover', ()=>{})
-    
+        board.setAttribute('id', target['columnId'])
+        board.addEventListener('dragover', ()=>{
+
+        })
+        
+
+
         const boardTitle = document.createElement('h2');
         boardTitle.classList.add('kanban-title');
         boardTitle.textContent = target.title;
@@ -21,11 +27,9 @@ export default class KanbanComponents{
         // Content Container
         const itemsContainer = document.createElement('div');
         itemsContainer.classList.add("items");
-        console.log(target)
-        itemsContainer.setAttribute('id', target.name);
+        itemsContainer.setAttribute('id', target.columnId);
     
         if (target.items && target.items.length > 0) {
-            console.log(target.items)
             target.items.forEach((item) => 
                 itemsContainer.appendChild(this.createTaskCard(item))
         );
@@ -51,13 +55,18 @@ export default class KanbanComponents{
         board.appendChild(itemsContainer);
         board.appendChild(addButton)
         
-    
+
+        
+
+
         // root.appendChild(board);
         return board;
     }
     static createTaskCard(item) {
         const itemSection = document.createElement('div');
         itemSection.classList.add('item');
+        itemSection.setAttribute('id', item.itemId);
+
 
         itemSection.addEventListener('dragstart', () =>{
             itemSection.classList.add('flying')
@@ -74,21 +83,7 @@ export default class KanbanComponents{
 
         const buttonSection = document.createElement('div');
         buttonSection.classList.add('buttonSection')
-        // Edit Button
-        // const editButton = document.createElement('button');
-        // editButton.textContent = 'Edit';
-        // editButton.classList.add('editButton');
-        // editButton.addEventListener('click', () => {
-        //     if (textSection.disabled) {
-        //         textSection.disabled = false;
-        //         editButton.textContent = 'Save';
-        //     } else {
-        //         textSection.disabled = true;
-        //         editButton.textContent = 'Edit';
-        //         // Call API to update item content
-        //         KanbanAPI.updateItem(item.itemId, textSection.value);
-        //     }
-        // });
+       
 
         const editButton = this.createButton( "Edit", "editButton",() => {
             if (textSection.disabled) {
@@ -102,21 +97,17 @@ export default class KanbanComponents{
             }   
         })
 
-        // const editButtonAction = 
-        // Delete Button
-        // const dltButton = document.createElement('button');
-        // dltButton.textContent = 'Delete';
-        // dltButton.classList.add('dltButton');
-        // dltButton.addEventListener('click', () => {
-        //     // Call API to delete item
-        //     KanbanAPI.deleteItem(item.itemId);
-        //     itemSection.remove();  // Remove from DOM
-        // });
 
         const dltButton = this.createButton("Delete", 'dltButton', () => {
             KanbanAPI.deleteItem(item.itemId);
             itemSection.remove(); 
         });
+        itemSection.addEventListener('dragstart',() =>{
+            itemSection.classList.add('flying')
+        })
+        itemSection.addEventListener('dragend',() =>{
+            itemSection.classList.remove('flying')
+        })
 
 
         buttonSection.appendChild(editButton);
@@ -148,6 +139,5 @@ export default class KanbanComponents{
         button.addEventListener('click', onClickEventFunction)
         return button
     }
-    static addBoard(){}
-    static addTaskSection(){}
+    
 }
